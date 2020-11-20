@@ -29,8 +29,8 @@ template<typename T,
 typename = std::enable_if_t<is_iterable_v<T> && !std::is_same<T,std::string>::value>>
 void print_ip(T const& containter,std::ostream& out = std::cout)
 {
-    auto iterBeg = container.begin();
-    auto iterEnd = container.end();
+    auto iterBeg = container.cbegin();
+    auto iterEnd = container.cend();
 
     for(auto iter = iterBeg; iter != iterEnd;++iter)
     {
