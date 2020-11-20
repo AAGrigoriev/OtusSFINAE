@@ -1,4 +1,6 @@
-#include <type_traits>
+#pragma once
+
+#include <traits.hpp>
 #include <ostream>
 
 template<typename T,
@@ -19,5 +21,28 @@ void print_ip(T integer,std::ostream& out = std::cout)
     {
         out << (int)bytes[i] << ".";
     }
-    out << (int)bytes[0] << std::endl;
+    out << (int)*bytes << std::endl;
+}
+
+
+template<typename T,
+typename = std::enable_if_t<is_iterable_v<T> && !std::is_same<T,std::string>::value>>
+void print_ip(T const& containter,std::ostream& out = std::cout)
+{
+    auto iterBeg = container.begin();
+    auto iterEnd = container.end();
+
+    for(auto iter = iterBeg; iter != iterEnd;++iter)
+    {
+        if(iter != iterBeg) out << ".";
+        out << *iter;
+    }
+}
+
+
+template<typename T,
+typename = std::enable_if_t<is_same<T,std::string>::value>>
+void print_ip(T const& string,std::ostream& out = std::cout)
+{
+    out << string;
 }
