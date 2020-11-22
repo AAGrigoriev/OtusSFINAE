@@ -9,12 +9,17 @@ namespace tuple_helper
     template <typename T, unsigned N, unsigned Max_Index>
     struct print_helper
     {
+        /*!
+            \brief Основная часть рекурсии для вывода tuple
+            param[in] - t   Tuple, который разбивается на кусочки
+            param[in] - out Поток вывода, по умолчанию std::cout
+       */
         inline static void print_ip_imp(T &t, std::ostream &out = std::cout)
         {
-            using typeNext    = decltype(std::get<N+1>(t));
-            using typeCurrent = decltype(std::get<N>(t)); 
-            
-            static_assert(std::is_same<typeCurrent,typeNext>::value && "types in tupple are different");
+            using typeNext = decltype(std::get<N + 1>(t));
+            using typeCurrent = decltype(std::get<N>(t));
+
+            static_assert(std::is_same<typeCurrent, typeNext>::value && "types in tupple are different");
 
             out << std::get<N>(t) << ".";
             print_helper<T, N + 1, Max_Index>::print_ip_imp(t, out);
@@ -24,6 +29,11 @@ namespace tuple_helper
     template <typename T, unsigned N>
     struct print_helper<T, N, N>
     {
+        /*!
+            \brief Конец рекурсии для вывода tuple
+            param[in] - t   Tuple, который разбивается на кусочки
+            param[in] - out Поток вывода, по умолчанию std::cout
+        */
         inline static void print_ip_imp(T &t, std::ostream &out = std::cout)
         {
             out << std::get<N>(t);
