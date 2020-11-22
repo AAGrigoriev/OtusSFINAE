@@ -1,7 +1,7 @@
 #pragma once
 
 #include <tuple>
-#include <ostream>
+#include <iostream>
 
 namespace tuple_helper
 {
@@ -11,17 +11,22 @@ namespace tuple_helper
     {
         inline static void print_ip_imp(T &t, std::ostream &out = std::cout)
         {
+            using typeNext    = decltype(std::get<N+1>(t));
+            using typeCurrent = decltype(std::get<N>(t)); 
+            
+            static_assert(std::is_same<typeCurrent,typeNext>::value && "types in tupple are different");
+
             out << std::get<N>(t) << ".";
             print_helper<T, N + 1, Max_Index>::print_ip_imp(t, out);
         }
-    }
+    };
 
-    template <typename T, unsigned Max_Index>
-    struct print_helper<T, Max_Index, MaxIdex>
+    template <typename T, unsigned N>
+    struct print_helper<T, N, N>
     {
         inline static void print_ip_imp(T &t, std::ostream &out = std::cout)
         {
-            out << std::get<Max_Index>(t);
+            out << std::get<N>(t);
         }
     };
 
