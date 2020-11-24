@@ -16,7 +16,7 @@ namespace tuple_helper
        */
         inline static void print_ip_imp(T &t, std::ostream &out = std::cout)
         {
-            using typeNext = decltype(std::get<N + 1>(t));
+            using typeNext    = decltype(std::get<N + 1>(t));
             using typeCurrent = decltype(std::get<N>(t));
 
             static_assert(std::is_same<typeCurrent, typeNext>::value && "types in tupple are different");
