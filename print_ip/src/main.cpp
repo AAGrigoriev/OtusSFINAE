@@ -1,24 +1,19 @@
 #include "print_ip.hpp"
 #include <vector>
 
-/**
- * @brief Entry point
- *
- * Execution of the program
- * starts here.
- *
- * @param argc Number of arguments
- * @param argv List of arguments
- *
- * @return Program exit status
- */
 
 using namespace printIP;
 
+/**
+ * @brief Main function
+ *
+ * Execution of the program
+ * starts here. ))
+ */
+
 int main()
 {
-
-    print_ip(-1);
+    print_ip(25);
     
     std::cout << std::endl;
 

@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.10)
 project(print_ip)
 
 add_subdirectory(print_ip)
+add_subdirectory(test)
 
 find_package(Doxygen COMPONENTS dot)
 
@@ -17,3 +18,5 @@ if(DOXYGEN_FOUND)
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/../
     COMMENT "Creating HTML documentation with Doxygen" VERBATIM)
 endif()
+
+enable_testing()

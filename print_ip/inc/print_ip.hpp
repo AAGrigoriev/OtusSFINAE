@@ -11,9 +11,9 @@ namespace printIP
     Print Integer Value
     @param[in] - integer (see is_integral)
     @param[in] - out Output stream
-        */
+    */
     template <typename T,
-              std::enable_if_t<std::is_integral<T>::value,bool> = true>
+              std::enable_if_t<std::is_integral<T>::value, bool> = true>
     void print_ip(T integer, std::ostream &out = std::cout)
     {
         const std::size_t count_bytes = sizeof(T);
@@ -53,7 +53,13 @@ namespace printIP
             out << *iter;
         }
     }
-
+    
+    /*!
+    @brief Print IP
+    Print for any type with method cbegin() and cend()
+    @param[in] - T std::string
+    @param[in] - out Output stream
+    */
     template <typename T,
               std::enable_if_t<std::is_same<T, std::string>::value, bool> = true>
     void print_ip(T &str, std::ostream &out = std::cout)
@@ -62,15 +68,21 @@ namespace printIP
     }
 
     template <typename... Args>
-    void print_tuple(std::tuple<Args...> &tuple, std::ostream &out = std::cout)
+    void print_tuple(std::tuple<Args...> const &tuple, std::ostream &out = std::cout)
     {
         tuple_helper::print_helper<std::tuple<Args...>, 0, sizeof...(Args) - 1>::print_ip_imp(tuple, out);
     }
 
+    /*!
+    @brief Print IP
+    Print for any type with method cbegin() and cend()
+    @param[in] - T std::tuple
+    @param[in] - out Output stream
+    */
     template <typename T,
               std::enable_if_t<tuple_helper::is_tuple<T>::value, bool> = true>
-    void print_ip(T &tuple, std::ostream &out = std::cout)
+    void print_ip(T const &tuple, std::ostream &out = std::cout)
     {
-        print_tuple(tuple,out);
+        print_tuple(tuple, out);
     }
 } // namespace printIP
