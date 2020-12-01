@@ -1,0 +1,11 @@
+/**
+ * @brief Другой способ как определить tuple
+ */
+template < template <typename ...> class T, typename = void >
+struct is_instantiation_of : std::false_type {};
+
+template < template <typename ...> class T, typename ... Args >
+struct is_instantiation_of< T, T<Args...> > : std::true_type {};
+
+template <template <typename ...> class T, typename U>
+inline constexpr bool is_instantiation_of_v = is_instantiation_of<T, U>::value;

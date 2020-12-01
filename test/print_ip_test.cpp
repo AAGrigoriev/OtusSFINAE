@@ -10,7 +10,7 @@ using namespace printIP;
 TEST(print, containter)
 {
     std::stringstream ss;
-    std::vector<int> vec_test{1, 2, 3, 4, 5, 6};
+    std::vector<char> vec_test{1, 2, 3, 4, 5, 6};
 
     print_ip(vec_test, ss);
 
@@ -22,7 +22,7 @@ TEST(print, containter)
 
     print_ip(list_test, ss);
 
-    ASSERT_EQ(ss.str(), "-1");
+    ASSERT_EQ(ss.str(), "255");
 }
 
 TEST(print, integer)
@@ -46,7 +46,7 @@ TEST(print, integer)
     ASSERT_EQ(ss.str(), "127.0.0.1");
     ss.str("");
 
-    print_ip(i, ss);
+    print_ip(li, ss);
     ASSERT_EQ(ss.str(), "123.45.67.89.101.112.131.41");
     ss.str("");
 }

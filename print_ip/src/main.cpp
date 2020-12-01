@@ -13,7 +13,7 @@ using namespace printIP;
 
 int main()
 {
-    print_ip(25);
+    print_ip(-1);
     
     std::cout << std::endl;
 
