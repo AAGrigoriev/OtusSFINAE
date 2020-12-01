@@ -2,6 +2,7 @@
 
 #include <tuple>
 #include <iostream>
+#include <helper_string.hpp>
 
 namespace tuple_helper
 {
@@ -24,7 +25,7 @@ namespace tuple_helper
 
             static_assert(std::is_same<typeCurrent, typeNext>::value && "types in tupple are different");
 
-            out << std::get<N>(t) << ".";
+            out << to_string(std::get<N>(t)) << ".";
             print_helper<T, N + 1, Max_Index>::print_ip_imp(t, out);
         }
     };
@@ -43,7 +44,7 @@ namespace tuple_helper
         */
         inline static void print_ip_imp(T const&t, std::ostream &out = std::cout)
         {
-            out << std::get<N>(t);
+            out << to_string(std::get<N>(t));
         }
     };
 

@@ -2,6 +2,7 @@
 
 #include <traits.hpp>
 #include "print_tuple.hpp"
+#include "helper_string.hpp"
 
 namespace printIP
 {
@@ -28,9 +29,9 @@ namespace printIP
 
         for (std::size_t i = count_bytes - 1; i > 0; --i)
         {
-            out << (int)bytes[i] << ".";
+            out << to_string(bytes[i]) << ".";
         }
-        out << (int)*bytes;
+        out << to_string(*bytes);
     }
 
     /*!
@@ -50,7 +51,7 @@ namespace printIP
         {
             if (iter != iterBeg)
                 out << ".";
-            out << *iter;
+            out << to_string(*iter);
         }
     }
     
@@ -64,7 +65,7 @@ namespace printIP
               std::enable_if_t<std::is_same<T, std::string>::value, bool> = true>
     void print_ip(T &str, std::ostream &out = std::cout)
     {
-        out << str;
+        out << to_string(str);
     }
 
     template <typename... Args>
